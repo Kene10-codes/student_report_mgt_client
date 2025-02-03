@@ -1,9 +1,21 @@
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 
-export function PasswordConfirmationValidator(Control: AbstractControl): {[ key: string] : boolean} | null {
-    const password = Control.get('password')
-  const confirmPassword = Control.get('confirmPassword')
-  if(password?.pristine || confirmPassword?.pristine) return null
-  return password && confirmPassword && password.value !== confirmPassword.value ? { 'misMatch': true } : null
-} 
+// Validator function
+export function PasswordMatchValidator(password: string, confirmPassword: string): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const passwordControl = control.get(password);
+    const confirmPasswordControl = control.get(confirmPassword);
+
+    if (!passwordControl || !confirmPasswordControl) {
+      return null; // Form controls not found
+    }
+
+    // Check if passwords match
+    const error = passwordControl.value === confirmPasswordControl.value ? null : { passwordMismatch: true };
+
+    confirmPasswordControl.setErrors(error);
+
+    return error;
+  };
+}
