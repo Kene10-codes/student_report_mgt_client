@@ -70,4 +70,11 @@
      border: 1.5px solide purple;
  }
  
- 
+ @media (max-width: 768px) {
+    .form-container {
+        max-width: 400px;
+        width: 350px;
+        padding: 35px;
+        box-shadow: 2px 2px 3px rgba(0,0,0,0.5);
+    }
+  }
