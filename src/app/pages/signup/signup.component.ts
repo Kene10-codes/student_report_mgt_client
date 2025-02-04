@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { PasswordMatchValidator } from '../shared/pasword.validator';
+import { PasswordMatchValidator } from '../../services/shared/pasword.validator';
 import { SignupService } from './signup/signup.service';
 
 
@@ -36,8 +36,8 @@ export class SignupComponent implements OnInit {
     }
     if (this.signupForm.valid) {
       this.signupService.signup(this.signupForm.value, headers).subscribe(response => {
-        const accessToken = response.accessToken;
-        localStorage.setItem('accessToken', accessToken)
+        const token = response;
+        localStorage.setItem('token', JSON.stringify(token))
         this.signupForm.reset()
         this.router.navigate(['/dashboard'])
       }, error => this.errorMsg = error.message)
