@@ -8,6 +8,7 @@
 
         <li><a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a></li>
         <li><a routerLink="/signup" routerLinkActive="active" ariaCurrentWhenActive="page">Signup</a></li>
-      </ul>
+        <li *ngIf="token"><a (click)="logout()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Log Out</a></li>  
+    </ul>
 </nav>
 

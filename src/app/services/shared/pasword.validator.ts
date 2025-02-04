@@ -8,9 +8,8 @@ export function PasswordMatchValidator(password: string, confirmPassword: string
     const confirmPasswordControl = control.get(confirmPassword);
 
     if (!passwordControl || !confirmPasswordControl) {
-      return null; // Form controls not found
+      return null;
     }
-
     // Check if passwords match
     const error = passwordControl.value === confirmPasswordControl.value ? null : { passwordMismatch: true };
 
