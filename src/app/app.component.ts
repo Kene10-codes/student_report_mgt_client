@@ -12,5 +12,6 @@ import { HomeComponent } from './pages/home/home.component';
 })
 
 export class AppComponent {
+  loading = false
   title = 'student-mgt-client';
 }
