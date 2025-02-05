@@ -6,7 +6,7 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  _url = 'https://student-mgt-backend.onrender.com/api'
+  _url = 'https://student-mgt-backend.onrender.com/api/v1'
   constructor(private _httpClient: HttpClient) { }
 
   login(data: any, header: any): Observable<any> {
