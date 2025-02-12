@@ -1,19 +1,19 @@
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { ReportService } from './report/report.service';
+import { StudentService } from './student/student.service';
 @Component({
   selector: 'app-dashboard',
-  providers: [ReportService],
+  providers: [StudentService],
   imports: [HttpClientModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private reportService:  ReportService ) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private studentService: StudentService) { }
   token: { accessToken?: string, name?: string, id?: number } = {}
   nameToken: string = ''
-  id: number | string = ''  
+  id: number | string = ''
   report: any = ''
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -23,16 +23,17 @@ export class DashboardComponent implements OnInit {
     }
 
     // invoke get report
-    this.getReport()
+    this.getStudents()
   }
 
-  getReport() {
+  getStudents() {
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token?.['accessToken']}`
     }
-      this.reportService.getReport(Number(this.id), headers).subscribe(response => {
-        this.report = response
-      })
+    this.studentService.getStudents(Number(this.id), headers).subscribe(response => {
+      console.log("res", response)
+      this.report = response
+    })
   }
 }
